@@ -1,0 +1,25 @@
+/* Custom scrollbar for lyrics display */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #374151; /* gray-700 */
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ef4444; /* red-500 */
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #dc2626; /* red-600 */
+}
+body {
+    font-family: 'Inter', sans-serif;
+}
+/* Style for selected onboarding buttons */
+.onboarding-option.selected {
+    border-color: #ef4444; /* red-500 */
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+    background-color: #dc2626; /* Slightly darker red */
+    color: white;
+}
