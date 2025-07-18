@@ -1,705 +1,474 @@
-// --- Mock Data ---
-const mockSongs = [
-    {
-        id: 's1',
-        title: 'Água da Vida',
-        artist: 'Eliana Ribeiro',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Agua+Vida',
-        type: 'liturgico',
-        tags: ['Louvor', 'Tempo Comum'],
-        chords: `(D)Água da (G)vida que (D)jorra, (A)aleluia!\n(D)Vem, Senhor (G)Jesus, vem (D)encher-nos (A)de (D)alegria.`,
-        lyrics: `Água da vida que jorra, aleluia!
-Vem, Senhor Jesus, vem encher-nos de alegria.
-Fonte que sacia a sede, aleluia!
-Cura e restaura, nos renova em amor.`
-    },
-    {
-        id: 's2',
-        title: 'Escala Maior de C',
-        artist: 'Exemplo Didático',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Escala+C',
-        type: 'estudo',
-        tags: ['Teoria', 'Iniciante', 'Exercício'],
-        chords: `C - D - E - F - G - A - B - C`,
-        lyrics: `Esta é a escala maior de Dó. Pratique cada nota e a sonoridade ascendente e descendente.
-Comece no Dó, suba até o próximo Dó, e depois desça novamente.`
-    },
-    {
-        id: 's3',
-        title: 'Minueto em G',
-        artist: 'J.S. Bach',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Minueto',
-        type: 'estudo',
-        tags: ['Clássico', 'Intermediário', 'Instrumental'],
-        chords: `(G)Minueto em (D)Sol Maior (G)para estudo de (C)flauta doce.\n(G)Melodia (D)suave, (Am)ritmo (D)elegante.`,
-        lyrics: `Minueto em Sol Maior, BWV Anh. 114.
-Uma peça clássica para refinar sua técnica e interpretação.`
-    },
-    {
-        id: 's4',
-        title: 'Kyrie Eleison',
-        artist: 'Canto Gregoriano',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Kyrie',
-        type: 'liturgico',
-        tags: ['Canto', 'Liturgia', 'Oração'],
-        chords: `Kyrie Eleison, Christe Eleison, Kyrie Eleison`,
-        lyrics: `Kyrie eleison. (Senhor, tende piedade de nós)
-Christe eleison. (Cristo, tende piedade de nós)
-Kyrie eleison. (Senhor, tende piedade de nós)`
-    },
-    {
-        id: 's5',
-        title: 'Noite Feliz',
-        artist: 'Tradicional',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Noite+Feliz',
-        type: 'liturgico',
-        tags: ['Natal', 'Tradicional', 'Festivo'],
-        chords: `(C)Noite fe(G)liz, (C)Noite de (F)paz! (C)Oh, Jesus, (G)o divino (C)amor.`,
-        lyrics: `Noite feliz! Noite feliz!
-Oh, Jesus, o divino amor.
-Paz na terra, aos homens,
-Aleluia! Noite feliz!`
-    },
-    {
-        id: 's6',
-        title: 'Tua Luz Brilhará',
-        artist: 'Leandro Dim',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Tua+Luz',
-        type: 'liturgico',
-        tags: ['Louvor', 'Adoração', 'Tempo Comum'],
-        chords: `(C)Tua luz (G)brilhará em (Am)mim.\n(F)E a esperança (C)não se (G)apagará.`,
-        lyrics: `Tua luz brilhará em mim, para sempre.
-Não há escuridão que possa nos calar.
-Com a tua força, vamos caminhar,
-E a esperança não se apagará.`
-    },
-    {
-        id: 's7',
-        title: 'Louva a Deus',
-        artist: 'Eugênio Jorge',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Louva+Deus',
-        type: 'liturgico',
-        tags: ['Louvor', 'Adoração'],
-        chords: `(G)Louva a Deus de (C)todo o coração.\n(D)Pois Ele é (G)bom e sua (C)misericórdia (D)dura (G)para (C)sempre.`,
-        lyrics: `Louva a Deus de todo o coração, com alegria.
-Exalta o seu nome em cada canção.
-Ele é fiel, Ele é amor, Ele é a nossa salvação.
-Louva a Deus.`
-    },
-    {
-        id: 's8',
-        title: 'Sem Coração',
-        artist: 'Católicas',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Sem+Coracao',
-        type: 'liturgico',
-        tags: ['Popular', 'Reflexão', 'Tempo Comum'],
-        chords: `(Am)Sem coração (G)não consigo (C)viver.\n(F)Teu amor me (C)sustenta, (G)minha (C)vida.`,
-        lyrics: `Sem coração não consigo viver, sem teu amor.
-Em cada passo, em cada olhar, tu estás.
-Minha alma anseia por ti, Senhor.
-Vem e habita em mim.`
-    },
-    {
-        id: 's9',
-        title: 'Louvando a Maria',
-        artist: 'Maria do Rosário',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Louvando+Maria',
-        type: 'liturgico',
-        tags: ['Louvor', 'Mariano', 'Devoção'],
-        chords: `(F)Louvando a (C)Maria, nossa (Bb)mãe.\n(Gm)Com carinho e (C)fé, em (F)seu (C)coração.`,
-        lyrics: `Louvando a Maria, nossa mãe querida, Rainha do Céu.
-Com carinho e fé, em seu coração.
-Ela intercede por nós, junto a Jesus.
-Ave Maria.`
-    },
-    {
-        id: 's10',
-        title: 'Exercício de Ritmo - Básico',
-        artist: 'Professor App',
-        albumArt: 'https://placehold.co/150x150/1A1A1A/CCE0CC?text=Ritmo',
-        type: 'estudo',
-        tags: ['Ritmo', 'Iniciante', 'Exercício'],
-        chords: ``,
-        lyrics: `Este exercício ajuda a desenvolver seu senso rítmico.
-Acompanhe a batida e sinta o pulso da música.`
-    },
-];
+// Array para armazenar o histórico de telas
+const screenHistory = [];
 
-// --- Global State Variables ---
-let currentScreen = 'onboarding'; // Start with the onboarding screen
-let currentSong = null;
-let searchQuery = '';
-let searchResults = [];
-let showChords = false;
-let showLyrics = true; // Default for auto-scrolling
-let currentKey = 'C';
-let showMoreOptions = false;
-let librarySortBy = 'title';
-let userInterests = new Set(); // To store user selections from onboarding
-
-// --- DOM Elements ---
-const screenContent = document.getElementById('screen-content');
-const bottomNavBar = document.getElementById('bottom-nav-bar');
-
-// --- Utility Functions ---
-const getTransposedChords = (originalChords, newKey) => {
-    if (!originalChords || !newKey) return '';
-    const originalNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const newKeyIndex = originalNotes.indexOf(newKey);
-    if (newKeyIndex === -1) return originalChords;
-
-    const firstChordMatch = originalChords.match(/\(([A-G][b#]?)\)/);
-    const originalSongKey = firstChordMatch ? firstChordMatch[1] : 'C';
-    const originalKeyIndex = originalNotes.indexOf(originalSongKey);
-
-    if (originalKeyIndex === -1) return originalChords;
-
-    const semitoneShift = (newKeyIndex - originalKeyIndex + 12) % 12;
-
-    return originalChords.replace(/\(([A-G][b#]?)(.*?)\)/g, (match, chordRoot, chordQuality) => {
-        const rootIndex = originalNotes.indexOf(chordRoot);
-        if (rootIndex === -1) return match;
-
-        const newRootIndex = (rootIndex + semitoneShift + 12) % 12;
-        return `(${originalNotes[newRootIndex]}${chordQuality})`;
-    });
+// Dados de exemplo para músicas (simulando um banco de dados)
+const songsData = {
+    'example-song-1': {
+        title: 'Música de Exemplo 1',
+        artist: 'Artista Exemplo A',
+        cover: 'https://placehold.co/150x150/EF4444/FFFFFF?text=Música+1',
+        lyrics: `
+            <p><span class="chord" data-original-chord="C">C</span>Eu me deparei</p>
+            <p><span class="chord" data-original-chord="G">G</span>Com Aquele Mestre escrevendo</p>
+            <p><span class="chord" data-original-chord="Am">Am</span>Com o dedo no chão</p>
+            <p><span class="chord" data-original-chord="F">F</span>Ouvindo os fariseus a lhes falar</p>
+            <br>
+            <p><span class="chord" data-original-chord="C">C</span>Eles queriam jogar</p>
+            <p><span class="chord" data-original-chord="G">G</span>Pedras em uma mulher</p>
+            <p><span class="chord" data-original-chord="Am">Am</span>Mas a cada frase</p>
+            <p><span class="chord" data-original-chord="F">F</span>Deus mostrava seu poder</p>
+            <br>
+            <p><span class="chord" data-original-chord="Dm">Dm</span>E ao final do julgamento</p>
+            <p><span class="chord" data-original-chord="G">G</span>Todos se retiraram</p>
+            <p><span class="chord" data-original-chord="C">C</span>E Ele disse: “Eu não te <span class="chord" data-original-chord="F">F</span>condeno</p>
+            <p><span class="chord" data-original-chord="G">G</span>Vá e não peques mais”</p>
+        `
+    },
+    'example-song-2': {
+        title: 'Canção da Esperança',
+        artist: 'Banda Harmonia',
+        cover: 'https://placehold.co/150x150/3B82F6/FFFFFF?text=Música+2',
+        lyrics: `
+            <p><span class="chord" data-original-chord="D">D</span>Em cada novo amanhecer</p>
+            <p><span class="chord" data-original-chord="A">A</span>Uma esperança a brilhar</p>
+            <p><span class="chord" data-original-chord="Bm">Bm</span>A vida que nos faz crescer</p>
+            <p><span class="chord" data-original-chord="G">G</span>Um novo caminho a trilhar</p>
+        `
+    },
+    'example-song-3': {
+        title: 'Melodia da Alma',
+        artist: 'Vozes Unidas',
+        cover: 'https://placehold.co/150x150/10B981/FFFFFF?text=Música+3',
+        lyrics: `
+            <p><span class="chord" data-original-chord="Em">Em</span>Sons que tocam o coração</p>
+            <p><span class="chord" data-original-chord="C">C</span>Melodias que nos elevam</p>
+            <p><span class="chord" data-original-chord="G">G</span>A alma encontra sua canção</p>
+            <p><span class="chord" data-original-chord="D">D</span>Quando a música nos leva</p>
+        `
+    },
+    'example-song-4': {
+        title: 'Ritmo Contagiante',
+        artist: 'Grupo Alegria',
+        cover: 'https://placehold.co/60x60/F59E0B/FFFFFF?text=Nova',
+        lyrics: `
+            <p><span class="chord" data-original-chord="Am">Am</span>Deixe o ritmo te levar</p>
+            <p><span class="chord" data-original-chord="G">G</span>Pela dança e pela vida</p>
+            <p><span class="chord" data-original-chord="C">C</span>Alegria no ar</p>
+            <p><span class="chord" data-original-chord="F">F</span>A cada batida</p>
+        `
+    },
+    'example-song-5': {
+        title: 'Hino da Paz',
+        artist: 'Coro Celestial',
+        cover: 'https://placehold.co/60x60/8B5CF6/FFFFFF?text=Clássico',
+        lyrics: `
+            <p><span class="chord" data-original-chord="G">G</span>Que a paz se espalhe</p>
+            <p><span class="chord" data-original-chord="D">D</span>Por todos os lugares</p>
+            <p><span class="chord" data-original-chord="Em">Em</span>Cantemos juntos</p>
+            <p><span class="chord" data-original-chord="C">C</span>Em união de amores</p>
+        `
+    }
+    // Adicione mais músicas aqui
 };
 
-// --- Render Functions for Components ---
+// Mapeamento de notas e acordes para transposição
+const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const modes = ['m', 'M', 'sus2', 'sus4', 'dim', 'aug', '7', 'maj7', 'm7', 'dim7', 'add9', 'm9', '11', '13', 'add4', '5', '6', 'm6', '9', 'm11', 'm13', 'sus', 'alt']; // Modificadores de acordes
 
-function renderSongListItem(song) {
-    const tagsHtml = song.tags.map(tag =>
-        `<span class="bg-green-600 text-white text-xs px-2 py-1 rounded-full whitespace-nowrap">${tag}</span>`
-    ).join('');
+// Variáveis de estado
+let currentSongId = null;
+let currentTranspose = 0; // 0 para tom original
+let autoScrollInterval = null;
+let autoScrollSpeed = 1; // Velocidade de rolagem automática
 
-    // Use a fallback image if albumArt is not defined or fails to load
-    const albumArtSrc = song.albumArt || `https://placehold.co/50x50/333333/CCE0CC?text=${song.title.substring(0, 3)}`;
+// Funções para controle de telas e modais
+function showScreen(screenId) {
+    // Esconde todas as telas
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.add('hidden');
+    });
 
-    return `
-        <div class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 cursor-pointer song-item" data-song-id="${song.id}">
-            <img src="${albumArtSrc}" alt="Capa do álbum de ${song.title}" class="w-12 h-12 rounded-md mr-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/50x50/333333/CCE0CC?text=${song.title.substring(0, 3)}';">
-            <div class="flex-grow">
-                <h3 class="text-base font-semibold text-gray-50 line-clamp-1">${song.title}</h3>
-                <p class="text-sm text-gray-400 line-clamp-1">${song.artist}</p>
-            </div>
-            <div class="flex flex-wrap justify-end gap-2 ml-4">
-                ${tagsHtml}
-            </div>
-        </div>
-    `;
+    // Mostra a tela desejada
+    document.getElementById(screenId).classList.remove('hidden');
+
+    // Atualiza o histórico de telas
+    if (screenHistory[screenHistory.length - 1] !== screenId) {
+        screenHistory.push(screenId);
+    }
+
+    // Atualiza a navegação inferior
+    updateNavBar(screenId);
 }
 
-// New Onboarding Screen Render Function
-function renderOnboardingScreen() {
-    screenContent.innerHTML = `
-        <div id="onboarding-screen" class="p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center h-full text-center">
-            <i class="fas fa-headphones text-6xl text-red-500 mb-6 animate-pulse"></i>
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-50 mb-4">Olá! Como você quer usar o Acorde?</h1>
-            <p class="text-lg text-gray-300 mb-8">Selecione suas principais áreas de interesse para personalizar sua experiência:</p>
+function updateNavBar(activeScreenId) {
+    document.querySelectorAll('nav button').forEach(button => {
+        button.classList.remove('text-primary');
+        button.classList.add('text-text-color');
+    });
 
-            <div id="onboarding-options" class="grid grid-cols-2 gap-4 w-full max-w-sm mb-10">
-                <button class="onboarding-option flex flex-col items-center p-4 rounded-xl border-2 border-gray-700 bg-gray-700 text-gray-50 hover:bg-gray-600 transition-all duration-200" data-interest="professor">
-                    <i class="fas fa-chalkboard-teacher text-3xl mb-2"></i>
-                    <span class="text-sm font-medium">Professor</span>
-                </button>
-                <button class="onboarding-option flex flex-col items-center p-4 rounded-xl border-2 border-gray-700 bg-gray-700 text-gray-50 hover:bg-gray-600 transition-all duration-200" data-interest="aluno">
-                    <i class="fas fa-user-graduate text-3xl mb-2"></i>
-                    <span class="text-sm font-medium">Aluno de Música</span>
-                </button>
-                <button class="onboarding-option flex flex-col items-center p-4 rounded-xl border-2 border-gray-700 bg-gray-700 text-gray-50 hover:bg-gray-600 transition-all duration-200" data-interest="musico">
-                    <i class="fas fa-guitar text-3xl mb-2"></i>
-                    <span class="text-sm font-medium">Músico</span>
-                </button>
-                <button class="onboarding-option flex flex-col items-center p-4 rounded-xl border-2 border-gray-700 bg-gray-700 text-gray-50 hover:bg-gray-600 transition-all duration-200" data-interest="cantor-igreja">
-                    <i class="fas fa-church text-3xl mb-2"></i>
-                    <span class="text-sm font-medium">Cantor de Igreja</span>
-                </button>
-                <button class="onboarding-option flex flex-col items-center p-4 rounded-xl border-2 border-gray-700 bg-gray-700 text-gray-50 hover:bg-gray-600 transition-all duration-200" data-interest="catolico">
-                    <i class="fas fa-cross text-3xl mb-2"></i>
-                    <span class="text-sm font-medium">Católico</span>
-                </button>
-                <button class="onboarding-option flex flex-col items-center p-4 rounded-xl border-2 border-gray-700 bg-gray-700 text-gray-50 hover:bg-gray-600 transition-all duration-200" data-interest="cantor">
-                    <i class="fas fa-microphone text-3xl mb-2"></i>
-                    <span class="text-sm font-medium">Cantor</span>
-                </button>
-            </div>
+    if (activeScreenId === 'home-screen') {
+        document.querySelector('nav button:nth-child(1)').classList.add('text-primary');
+        document.querySelector('nav button:nth-child(1)').classList.remove('text-text-color');
+    } else if (activeScreenId === 'search-screen') {
+        document.querySelector('nav button:nth-child(2)').classList.add('text-primary');
+        document.querySelector('nav button:nth-child(2)').classList.remove('text-text-color');
+    } else if (activeScreenId === 'folders-screen' || activeScreenId === 'folder-detail-screen') {
+        document.querySelector('nav button:nth-child(3)').classList.add('text-primary');
+        document.querySelector('nav button:nth-child(3)').classList.remove('text-text-color');
+    } else if (activeScreenId === 'playlists-screen') {
+        document.querySelector('nav button:nth-child(4)').classList.add('text-primary');
+        document.querySelector('nav button:nth-child(4)').classList.remove('text-text-color');
+    }
+}
 
-            <button id="continue-onboarding-button" class="px-8 py-3 bg-red-500 text-white font-semibold rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 transform hover:scale-105">
-                Continuar
-            </button>
-        </div>
-    `;
+function showModal(modalId) {
+    document.getElementById(modalId).classList.remove('hidden');
+    // Para modais de input, foca no primeiro campo
+    if (modalId === 'create-folder-modal') {
+        document.getElementById('folder-name').focus();
+    } else if (modalId === 'create-playlist-modal') {
+        document.getElementById('playlist-name').focus();
+    }
+}
 
-    // Add event listeners for onboarding options
-    document.querySelectorAll('.onboarding-option').forEach(button => {
-        button.addEventListener('click', (event) => {
-            const interest = event.currentTarget.dataset.interest;
-            if (userInterests.has(interest)) {
-                userInterests.delete(interest);
-                event.currentTarget.classList.remove('selected');
-            } else {
-                userInterests.add(interest);
-                event.currentTarget.classList.add('selected');
+function hideModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+    // Limpa o status de mensagens ao fechar o modal
+    const statusElement = document.getElementById(modalId.replace('-modal', '-create-status')) || document.getElementById(modalId.replace('-modal', '-status'));
+    if (statusElement) {
+        statusElement.textContent = '';
+    }
+}
+
+function goBack() {
+    // Remove a tela atual do histórico
+    screenHistory.pop();
+    // Mostra a tela anterior no histórico
+    const previousScreen = screenHistory[screenHistory.length - 1];
+    if (previousScreen) {
+        showScreen(previousScreen);
+    } else {
+        // Se não houver tela anterior, volta para a home
+        showScreen('home-screen');
+    }
+}
+
+// Funções de Temas e Cores
+function applyTheme(theme) {
+    const body = document.body;
+    body.classList.remove('light-theme', 'dark-theme');
+    if (theme === 'system') {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            body.classList.add('dark-theme');
+        } else {
+            body.classList.add('light-theme');
+        }
+    } else {
+        body.classList.add(theme + '-theme');
+    }
+    localStorage.setItem('theme', theme); // Salva a preferência do usuário
+}
+
+function setPrimaryColor(color) {
+    document.documentElement.style.setProperty('--primary-color', color);
+    localStorage.setItem('primaryColor', color); // Salva a preferência do usuário
+}
+
+// Inicializa o tema e a cor ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    const savedPrimaryColor = localStorage.getItem('primaryColor');
+
+    if (savedTheme) {
+        document.querySelectorAll('input[name="theme"]').forEach(radio => {
+            if (radio.value === savedTheme) {
+                radio.checked = true;
             }
         });
-    });
+        applyTheme(savedTheme);
+    } else {
+        // Aplica o tema do sistema como padrão se não houver preferência salva
+        applyTheme('system');
+    }
 
-    // Add event listener for continue button
-    document.getElementById('continue-onboarding-button').addEventListener('click', () => {
-        // In a real app, you would save userInterests and tailor the home screen
-        console.log('Interesses selecionados:', Array.from(userInterests));
-        navigateTo('home');
-    });
-     // Apply 'selected' class if already in userInterests (for re-rendering scenarios)
-    userInterests.forEach(interest => {
-        const btn = document.querySelector(`.onboarding-option[data-interest="${interest}"]`);
-        if (btn) btn.classList.add('selected');
-    });
-}
+    if (savedPrimaryColor) {
+        setPrimaryColor(savedPrimaryColor);
+    }
 
-
-function renderHomeScreen() {
-    const educationalSongs = mockSongs.filter(song => song.type === 'estudo');
-    const religiousSongs = mockSongs.filter(song => song.type === 'liturgico');
-    const recentSongs = mockSongs.slice(0, 4);
-
-    screenContent.innerHTML = `
-        <div id="home-screen" class="p-6 sm:p-8 md:p-10">
-            <div class="flex items-center justify-center mb-6">
-                <i class="fas fa-headphones text-2xl text-red-500 mr-2"></i>
-                <h1 class="text-3xl sm:text-4xl font-bold text-center text-red-500">
-                    Acorde - Católico
-                </h1>
-            </div>
-
-            <section class="mb-8">
-                <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-200 flex items-center">
-                    <i class="fas fa-calendar-alt mr-3 text-red-400"></i>Momentos do Ano
-                </h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    <button class="bg-gray-700 text-gray-50 p-4 rounded-xl shadow-md hover:bg-gray-600 transition-colors duration-200 flex flex-col items-center text-center">
-                        <i class="fas fa-holly-berry text-2xl mb-2 text-green-400"></i>
-                        <span class="text-sm font-medium">Natal</span>
-                    </button>
-                    <button class="bg-gray-700 text-gray-50 p-4 rounded-xl shadow-md hover:bg-gray-600 transition-colors duration-200 flex flex-col items-center text-center">
-                        <i class="fas fa-cross text-2xl mb-2 text-yellow-400"></i>
-                        <span class="text-sm font-medium">Quaresma</span>
-                    </button>
-                    <button class="bg-gray-700 text-gray-50 p-4 rounded-xl shadow-md hover:bg-gray-600 transition-colors duration-200 flex flex-col items-center text-center">
-                        <i class="fas fa-hands-praying text-2xl mb-2 text-blue-400"></i>
-                        <span class="text-sm font-medium">Adoração</span>
-                    </button>
-                    <button class="bg-gray-700 text-gray-50 p-4 rounded-xl shadow-md hover:bg-gray-600 transition-colors duration-200 flex flex-col items-center text-center">
-                        <i class="fas fa-leaf text-2xl mb-2 text-orange-400"></i>
-                        <span class="text-sm font-medium">Tempo Comum</span>
-                    </button>
-                </div>
-            </section>
-
-            <section class="mb-8">
-                <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-200 flex items-center">
-                    <i class="fas fa-history mr-3 text-red-400"></i>Músicas Recentes
-                </h2>
-                <div class="grid grid-cols-1 gap-4">
-                    ${recentSongs.map(renderSongListItem).join('')}
-                </div>
-            </section>
-
-            <section class="mb-8">
-                <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-200 flex items-center">
-                    <i class="fas fa-book-open mr-3 text-red-400"></i>Para Professores e Alunos
-                </h2>
-                <div class="grid grid-cols-1 gap-4">
-                    ${educationalSongs.map(renderSongListItem).join('')}
-                </div>
-            </section>
-
-            <section class="mb-8">
-                <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-200 flex items-center">
-                    <i class="fas fa-church mr-3 text-red-400"></i>Fé e Comunidade
-                </h2>
-                <div class="grid grid-cols-1 gap-4">
-                    ${religiousSongs.map(renderSongListItem).join('')}
-                </div>
-            </section>
-        </div>
-    `;
-    // Add event listeners for song items
-    screenContent.querySelectorAll('.song-item').forEach(item => {
-        item.addEventListener('click', (event) => {
-            const songId = event.currentTarget.dataset.songId;
-            const song = mockSongs.find(s => s.id === songId);
-            if (song) playSong(song);
+    // Adiciona event listeners para as opções de tema
+    document.querySelectorAll('input[name="theme"]').forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            applyTheme(event.target.value);
         });
     });
+
+    // Garante que a tela inicial seja mostrada ao carregar
+    showScreen('home-screen');
+});
+
+// Funções para detalhes da música
+function showSongDetail(songId) {
+    const song = songsData[songId];
+    if (song) {
+        document.getElementById('song-title').textContent = song.title;
+        document.getElementById('song-artist').textContent = song.artist;
+        document.getElementById('song-cover').src = song.cover;
+
+        // Injeta a letra e acordes
+        const lyricsContainer = document.getElementById('lyrics-container');
+        lyricsContainer.innerHTML = song.lyrics;
+
+        currentSongId = songId; // Define a música atual
+        currentTranspose = 0; // Reseta a transposição ao mudar de música
+        document.getElementById('current-key').textContent = 'C'; // Reseta a chave exibida
+        showScreen('song-detail-screen');
+    } else {
+        console.error('Música não encontrada:', songId);
+    }
 }
 
-function renderSearchScreen() {
-    screenContent.innerHTML = `
-        <div id="search-screen" class="p-6 sm:p-8 md:p-10">
-            <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-gray-50">Buscar Músicas</h1>
-            <div class="relative mb-8">
-                <input
-                    type="text"
-                    placeholder="Buscar músicas, artistas, tags..."
-                    class="w-full p-3 pl-10 rounded-full bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 text-gray-50 transition duration-300 shadow-sm"
-                    id="search-input" value="${searchQuery}"
-                />
-                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                </svg>
-            </div>
+// Funções de Transposição
+function transposeChords(semitones) {
+    if (!currentSongId) return;
 
-            <section id="search-results-section">
-                ${searchResults.length > 0 ? `
-                    <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-200">Resultados da Busca</h2>
-                    <div class="grid grid-cols-1 gap-4">
-                        ${searchResults.map(renderSongListItem).join('')}
-                    </div>
-                ` : (searchQuery.length > 0 ? `<p class="text-center text-gray-400">Nenhum resultado encontrado para "${searchQuery}".</p>` : '')}
-            </section>
-        </div>
-    `;
-    // Add event listeners
-    document.getElementById('search-input').addEventListener('input', (event) => {
-        searchQuery = event.target.value;
-        if (searchQuery.length > 1) {
-            searchResults = mockSongs.filter(song =>
-                song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                song.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                song.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-            );
+    const lyricsContainer = document.getElementById('lyrics-container');
+    const chords = lyricsContainer.querySelectorAll('.chord');
+
+    // Mapeamento de acordes com sustenidos e bemóis
+    const sharpNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const flatNotes = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+
+    // Determina qual mapeamento usar para a transposição
+    // Se a música original contiver sustenidos, mantém sustenidos. Caso contrário, tenta bemóis.
+    let useSharp = true;
+    if (songsData[currentSongId].lyrics.includes('b')) { // Verifica se há bemóis na letra original
+        useSharp = false;
+    }
+
+    currentTranspose += semitones;
+
+    // Garante que a transposição fique dentro dos limites de uma oitava
+    if (currentTranspose > 11) currentTranspose -= 12;
+    if (currentTranspose < -12) currentTranspose += 12;
+
+    chords.forEach(chordElement => {
+        const originalChord = chordElement.dataset.originalChord;
+        if (!originalChord) return;
+
+        let baseNote = '';
+        let modifier = '';
+
+        // Extrai a nota base e o modificador do acorde
+        const match = originalChord.match(/^([A-G][b#]?)(.*)/);
+        if (match) {
+            baseNote = match[1];
+            modifier = match[2];
         } else {
-            searchResults = [];
+            return; // Se não conseguir extrair, pula
         }
-        // Re-render only the search results section for efficiency
-        const searchResultsSection = document.getElementById('search-results-section');
-        if (searchResultsSection) {
-            searchResultsSection.innerHTML = `
-                ${searchResults.length > 0 ? `
-                    <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-200">Resultados da Busca</h2>
-                    <div class="grid grid-cols-1 gap-4">
-                        ${searchResults.map(renderSongListItem).join('')}
-                    </div>
-                ` : (searchQuery.length > 0 ? `<p class="text-center text-gray-400">Nenhum resultado encontrado para "${searchQuery}".</p>` : '')}
+
+        const currentNotes = useSharp ? sharpNotes : flatNotes;
+        let originalIndex = currentNotes.indexOf(baseNote);
+
+        if (originalIndex === -1) {
+            // Tenta o outro conjunto de notas se não encontrar
+            originalIndex = (useSharp ? flatNotes : sharpNotes).indexOf(baseNote);
+            if (originalIndex !== -1) {
+                useSharp = !useSharp; // Alterna o conjunto de notas
+                currentNotes = useSharp ? sharpNotes : flatNotes;
+            } else {
+                console.warn('Nota base não encontrada para transposição:', baseNote);
+                return;
+            }
+        }
+
+        let newIndex = (originalIndex + currentTranspose) % 12;
+        if (newIndex < 0) newIndex += 12; // Garante que o índice seja positivo
+
+        const newBaseNote = currentNotes[newIndex];
+        chordElement.textContent = newBaseNote + modifier;
+    });
+
+    // Atualiza a chave exibida no modal
+    const currentKeyIndex = (notes.indexOf(notes[0]) + currentTranspose) % 12;
+    document.getElementById('current-key').textContent = notes[currentKeyIndex < 0 ? currentKeyIndex + 12 : currentKeyIndex];
+}
+
+// Função para alternar o play/pause (simulado)
+let isPlaying = false;
+function togglePlayPause() {
+    const playPauseIcon = document.getElementById('play-pause-icon');
+    const playPauseText = document.getElementById('play-pause-text');
+    if (isPlaying) {
+        playPauseIcon.classList.remove('fa-pause');
+        playPauseIcon.classList.add('fa-play');
+        playPauseText.textContent = 'Tocar';
+        isPlaying = false;
+        alert('Música pausada!');
+    } else {
+        playPauseIcon.classList.remove('fa-play');
+        playPauseIcon.classList.add('fa-pause');
+        playPauseText.textContent = 'Pausar';
+        isPlaying = true;
+        alert('Música tocando!');
+    }
+}
+
+// Funções de rolagem automática
+function toggleAutoScroll() {
+    const autoscrollIcon = document.getElementById('autoscroll-icon');
+    const lyricsContainer = document.getElementById('lyrics-container');
+
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+        autoscrollIcon.classList.remove('text-primary'); // Desativa a cor primária
+        alert('Rolagem automática desativada.');
+    } else {
+        autoscrollIcon.classList.add('text-primary'); // Ativa a cor primária
+        autoScrollInterval = setInterval(() => {
+            lyricsContainer.scrollTop += autoScrollSpeed;
+            // Se chegou ao final, para a rolagem
+            if (lyricsContainer.scrollTop + lyricsContainer.clientHeight >= lyricsContainer.scrollHeight) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+                autoscrollIcon.classList.remove('text-primary');
+            }
+        }, 50); // Ajuste este valor para controlar a suavidade da rolagem
+        alert('Rolagem automática ativada. Use a barra de rolagem para ajustar a velocidade.');
+    }
+}
+
+// Funções de Notas
+function saveNotes() {
+    const notesContent = document.getElementById('user-notes').value;
+    // Em um aplicativo real, você salvaria isso em um banco de dados ou localStorage
+    console.log('Notas salvas:', notesContent);
+    document.getElementById('notes-save-status').textContent = 'Notas salvas com sucesso!';
+    setTimeout(() => {
+        document.getElementById('notes-save-status').textContent = '';
+        hideModal('notes-modal');
+    }, 1500);
+}
+
+// Funções de Compartilhar/Exportar (Simuladas)
+function simulateExport(format) {
+    const exportStatus = document.getElementById('export-status');
+    exportStatus.textContent = `Exportando como ${format}...`;
+    setTimeout(() => {
+        exportStatus.textContent = `Música exportada como ${format}!`;
+    }, 2000);
+    setTimeout(() => {
+        hideModal('share-export-modal');
+    }, 3000);
+}
+
+function simulateShare() {
+    const exportStatus = document.getElementById('export-status');
+    exportStatus.textContent = 'Gerando link para compartilhamento...';
+    setTimeout(() => {
+        const shareLink = 'https://acorde.app/song/' + currentSongId; // Exemplo de link
+        exportStatus.textContent = `Link copiado: ${shareLink}`;
+        navigator.clipboard.writeText(shareLink).then(() => {
+            console.log('Link copiado para a área de transferência');
+        }).catch(err => {
+            console.error('Erro ao copiar o link:', err);
+        });
+    }, 2000);
+    setTimeout(() => {
+        hideModal('share-export-modal');
+    }, 3000);
+}
+
+function simulateDownloadOffline() {
+    const exportStatus = document.getElementById('export-status');
+    exportStatus.textContent = 'Baixando para uso offline...';
+    setTimeout(() => {
+        exportStatus.textContent = 'Música baixada para uso offline!';
+    }, 2000);
+    setTimeout(() => {
+        hideModal('share-export-modal');
+    }, 3000);
+}
+
+// Funções de Pastas
+function showFolderDetail(folderName, songs) {
+    document.getElementById('folder-detail-title').textContent = folderName;
+    const folderSongsList = document.getElementById('folder-songs-list');
+    folderSongsList.innerHTML = ''; // Limpa a lista existente
+
+    if (songs && songs.length > 0) {
+        songs.forEach(song => {
+            const songItem = document.createElement('div');
+            songItem.className = 'bg-card rounded-lg shadow-md p-3 flex items-center justify-between cursor-pointer';
+            songItem.onclick = () => showSongDetail(song.id);
+            songItem.innerHTML = `
+                <div>
+                    <p class="font-semibold text-base">${song.title}</p>
+                    <p class="text-xs text-gray-400">${song.artist}</p>
+                </div>
+                <button class="text-text-color hover:text-primary"><i class="fas fa-ellipsis-v"></i></button>
             `;
-            // Add event listeners for new song items
-            searchResultsSection.querySelectorAll('.song-item').forEach(item => {
-                item.addEventListener('click', (event) => {
-                    const songId = event.currentTarget.dataset.songId;
-                    const song = mockSongs.find(s => s.id === songId);
-                    if (song) playSong(song);
-                });
-            });
-        }
-    });
-    screenContent.querySelectorAll('.song-item').forEach(item => {
-        item.addEventListener('click', (event) => {
-            const songId = event.currentTarget.dataset.songId;
-            const song = mockSongs.find(s => s.id === songId);
-            if (song) playSong(song);
+            folderSongsList.appendChild(songItem);
         });
-    });
+    } else {
+        folderSongsList.innerHTML = `<p class="text-center text-gray-400">Esta pasta está vazia.</p>`;
+    }
+
+    showScreen('folder-detail-screen');
 }
 
-function renderCommunityScreen() {
-    screenContent.innerHTML = `
-        <div id="community-screen" class="p-6 sm:p-8 md:p-10 text-center text-gray-400 h-full flex flex-col justify-center items-center">
-            <i class="fas fa-users text-5xl mb-4 text-red-400"></i>
-            <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-50">Comunidade & Aprender</h1>
-            <p class="text-lg mb-4">Conecte-se com outros músicos, professores e fiéis. Participe de grupos de estudo, crie playlists colaborativas e compartilhe seu conhecimento.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <button class="bg-gray-700 text-gray-50 px-5 py-3 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300">
-                    <i class="fas fa-plus mr-2"></i>Criar Playlist Colaborativa
-                </button>
-                <button class="bg-gray-700 text-gray-50 px-5 py-3 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300">
-                    <i class="fas fa-qrcode mr-2"></i>Compartilhar por QR Code
-                </button>
-            </div>
-            <p class="mt-6 text-sm">Funcionalidades como "bibliotecas de livros" e mais opções de "compartilhamento por QR Code" estarão disponíveis em futuras versões.</p>
-        </div>
-    `;
-}
+function simulateCreateFolder() {
+    const folderName = document.getElementById('folder-name').value;
+    const folderDescription = document.getElementById('folder-description').value;
+    const folderPrivacy = document.getElementById('folder-privacy').value;
+    const createStatus = document.getElementById('folder-create-status');
 
-function renderLibraryScreen() {
-    let sortedSongs = [...mockSongs].sort((a, b) => {
-        if (librarySortBy === 'title') {
-            return a.title.localeCompare(b.title);
-        }
-        return 0; // Default
-    });
-
-    screenContent.innerHTML = `
-        <div id="library-screen" class="p-6 sm:p-8 md:p-10">
-            <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-gray-50">Minha Biblioteca</h1>
-
-            <section class="mb-8">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl sm:text-2xl font-semibold text-gray-200">Minhas Músicas</h2>
-                    <div class="relative">
-                        <select
-                            id="sort-by-select"
-                            class="appearance-none px-4 py-2 rounded-full bg-gray-700 text-gray-50 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer pr-8 text-sm"
-                        >
-                            <option value="title" ${librarySortBy === 'title' ? 'selected' : ''}>Classificar por Título</option>
-                            </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-                            <i class="fas fa-sort text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 gap-4">
-                    ${sortedSongs.map(renderSongListItem).join('')}
-                </div>
-                <div class="flex flex-wrap justify-center gap-4 mt-6">
-                    <button class="bg-gray-700 text-gray-50 px-5 py-3 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300">
-                        <i class="fas fa-plus mr-2"></i>Adicionar Nova Música
-                    </button>
-                    <button class="bg-gray-700 text-gray-50 px-5 py-3 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300">
-                        <i class="fas fa-file-export mr-2"></i>Exportar Selecionadas
-                    </button>
-                    <button class="bg-gray-700 text-gray-50 px-5 py-3 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300">
-                        <i class="fas fa-sync-alt mr-2"></i>Sincronizar
-                    </button>
-                </div>
-            </section>
-        </div>
-    `;
-    // Add event listeners
-    document.getElementById('sort-by-select').addEventListener('change', (event) => {
-        librarySortBy = event.target.value;
-        renderLibraryScreen(); // Re-render to apply sort
-    });
-    screenContent.querySelectorAll('.song-item').forEach(item => {
-        item.addEventListener('click', (event) => {
-            const songId = event.currentTarget.dataset.songId;
-            const song = mockSongs.find(s => s.id === songId);
-            if (song) playSong(song);
-        });
-    });
-}
-
-function renderPlayerScreen() {
-    if (!currentSong) {
-        screenContent.innerHTML = `
-            <div class="flex flex-col items-center justify-center p-8 text-gray-400 h-full">
-                <p>Nenhuma música selecionada. Volte para a página inicial.</p>
-                <button id="player-back-button-empty" class="mt-4 px-6 py-2 bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
-                    Voltar
-                </button>
-            </div>
-        `;
-        document.getElementById('player-back-button-empty').addEventListener('click', () => navigateTo('home'));
+    if (!folderName.trim()) {
+        createStatus.textContent = 'O nome da pasta é obrigatório!';
+        createStatus.classList.add('text-red-500');
         return;
     }
 
-    const keys = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const transposedChords = showChords ? getTransposedChords(currentSong.chords, currentKey) : '';
-    const albumArtSrc = currentSong.albumArt || `https://placehold.co/250x250/333333/CCE0CC?text=${currentSong.title.substring(0, 5)}`;
+    createStatus.textContent = `Criando pasta "${folderName}"...`;
+    createStatus.classList.remove('text-red-500');
+    createStatus.classList.add('text-green-500');
 
-    screenContent.innerHTML = `
-        <div id="player-screen" class="p-6 sm:p-8 md:p-10 flex flex-col items-center relative min-h-[500px]">
-            <div class="flex justify-between w-full mb-6">
-                <button id="player-back-button" class="p-2 bg-gray-700 rounded-full text-gray-50 hover:bg-gray-600 transition-colors duration-300 shadow-md">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <h1 class="text-xl sm:text-2xl font-bold text-gray-50 text-center flex-grow mx-4 line-clamp-1">${currentSong.title}</h1>
-                <div class="relative">
-                    <button id="more-options-button" class="p-2 bg-gray-700 rounded-full text-gray-50 hover:bg-gray-600 transition-colors duration-300 shadow-md">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    ${showMoreOptions ? `
-                        <div class="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg py-1 z-10">
-                            <button id="edit-song-button" class="block px-4 py-2 text-sm text-gray-50 hover:bg-gray-600 w-full text-left">
-                                <i class="fas fa-edit mr-2"></i>Editar Música
-                            </button>
-                            <button id="share-song-button" class="block px-4 py-2 text-sm text-gray-50 hover:bg-gray-600 w-full text-left">
-                                <i class="fas fa-share-alt mr-2"></i>Compartilhar
-                            </button>
-                            <button id="add-to-playlist-button" class="block px-4 py-2 text-sm text-gray-50 hover:bg-gray-600 w-full text-left">
-                                <i class="fas fa-plus-circle mr-2"></i>Adicionar à Playlist
-                            </button>
-                            <button id="print-song-button" class="block px-4 py-2 text-sm text-gray-50 hover:bg-gray-600 w-full text-left">
-                                <i class="fas fa-print mr-2"></i>Imprimir
-                            </button>
-                            <button id="report-error-button" class="block px-4 py-2 text-sm text-gray-50 hover:bg-gray-600 w-full text-left text-red-400">
-                                <i class="fas fa-bug mr-2"></i>Reportar Erro
-                            </button>
-                        </div>
-                    ` : ''}
-                </div>
-            </div>
-
-            <img src="${albumArtSrc}" alt="Capa do álbum de ${currentSong.title}" class="w-48 h-48 rounded-lg shadow-md mb-6 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/250x250/333333/CCE0CC?text=${currentSong.title.substring(0, 5)}';">
-
-            <p class="text-gray-400 text-sm mb-6">${currentSong.artist}</p>
-
-            <div class="flex items-center justify-center space-x-6 mb-6 text-gray-300 text-2xl">
-                <button class="hover:text-red-500 transition-colors duration-200"><i class="fas fa-backward"></i></button>
-                <button class="text-red-500 text-4xl hover:text-red-400 transition-colors duration-200"><i class="fas fa-play-circle"></i></button>
-                <button class="hover:text-red-500 transition-colors duration-200"><i class="fas fa-forward"></i></button>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-4 mb-6">
-                ${currentSong.chords ? `
-                    <button id="toggle-chords" class="px-5 py-2 rounded-full font-medium transition-all duration-300 ${showChords ? 'bg-red-500 text-white shadow-md' : 'bg-gray-700 text-gray-50 hover:bg-gray-600'}">
-                        <i class="fas fa-music mr-2"></i>${showChords ? 'Ocultar Acordes' : 'Mostrar Acordes'}
-                    </button>
-                ` : `<span class="px-5 py-2 rounded-full font-medium bg-gray-700 text-gray-50 opacity-50 cursor-not-allowed"><i class="fas fa-music mr-2"></i>Acordes Não Disponíveis</span>`}
-                <button id="toggle-lyrics" class="px-5 py-2 rounded-full font-medium transition-all duration-300 ${showLyrics ? 'bg-red-500 text-white shadow-md' : 'bg-gray-700 text-gray-50 hover:bg-gray-600'}">
-                    <i class="fas fa-align-left mr-2"></i>${showLyrics ? 'Ocultar Letra' : 'Mostrar Letra'}
-                </button>
-            </div>
-
-            ${showChords ? `
-                <div class="mb-6 w-full max-w-sm">
-                    <label for="key-select" class="block text-center text-gray-300 text-sm font-medium mb-2">Transpor para:</label>
-                    <div class="relative">
-                        <select id="key-select" class="block w-full px-4 py-2 pr-8 rounded-full bg-gray-700 border border-gray-600 text-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none cursor-pointer">
-                            ${keys.map(key => `<option value="${key}" ${key === currentKey ? 'selected' : ''}>${key}</option>`).join('')}
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-            ` : ''}
-
-            <div class="bg-gray-700 p-6 rounded-lg shadow-inner w-full custom-scrollbar flex-grow overflow-y-auto mb-6 text-gray-200 whitespace-pre-wrap text-center max-h-96">
-                ${showChords && currentSong.chords ? `<pre class="font-mono text-yellow-300 text-sm sm:text-base mb-4">${transposedChords}</pre>` : ''}
-                ${showLyrics && currentSong.lyrics ? `<p class="text-sm sm:text-base">${currentSong.lyrics}</p>` : ''}
-                ${!showChords && !showLyrics ? `<p class="text-gray-400">Selecione uma opção para exibir acordes ou letras.</p>` : ''}
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-2 mb-4">
-                ${currentSong.tags.map(tag => `<span class="bg-gray-600 text-gray-300 text-xs px-3 py-1 rounded-full">${tag}</span>`).join('')}
-            </div>
-        </div>
-    `;
-
-    // Add event listeners for player screen elements
-    document.getElementById('player-back-button').addEventListener('click', () => navigateTo('home'));
-
-    const toggleChordsButton = document.getElementById('toggle-chords');
-    if (toggleChordsButton) {
-        toggleChordsButton.addEventListener('click', () => {
-            showChords = !showChords;
-            renderPlayerScreen();
-        });
-    }
-
-    const toggleLyricsButton = document.getElementById('toggle-lyrics');
-    if (toggleLyricsButton) {
-        toggleLyricsButton.addEventListener('click', () => {
-            showLyrics = !showLyrics;
-            renderPlayerScreen();
-        });
-    }
-
-    const keySelect = document.getElementById('key-select');
-    if (keySelect) {
-        keySelect.addEventListener('change', (event) => {
-            currentKey = event.target.value;
-            renderPlayerScreen();
-        });
-    }
-
-    const moreOptionsButton = document.getElementById('more-options-button');
-    if (moreOptionsButton) {
-        moreOptionsButton.addEventListener('click', () => {
-            showMoreOptions = !showMoreOptions;
-            renderPlayerScreen(); // Re-render to show/hide options
-        });
-    }
-
-    // Event listeners for more options dropdown (if visible)
-    if (showMoreOptions) {
-        document.getElementById('edit-song-button')?.addEventListener('click', () => alert('Funcionalidade de Editar Música em desenvolvimento!'));
-        document.getElementById('share-song-button')?.addEventListener('click', () => alert('Funcionalidade de Compartilhar em desenvolvimento!'));
-        document.getElementById('add-to-playlist-button')?.addEventListener('click', () => alert('Funcionalidade de Adicionar à Playlist em desenvolvimento!'));
-        document.getElementById('print-song-button')?.addEventListener('click', () => window.print());
-        document.getElementById('report-error-button')?.addEventListener('click', () => alert('Funcionalidade de Reportar Erro em desenvolvimento!'));
-    }
+    setTimeout(() => {
+        // Simula a criação da pasta
+        console.log('Pasta criada:', { name: folderName, description: folderDescription, privacy: folderPrivacy });
+        createStatus.textContent = `Pasta "${folderName}" criada com sucesso!`;
+        // Você poderia adicionar a pasta à interface aqui dinamicamente
+        setTimeout(() => {
+            hideModal('create-folder-modal');
+        }, 1000);
+    }, 2000);
 }
 
+// Funções de Playlists
+function simulateCreatePlaylist() {
+    const playlistName = document.getElementById('playlist-name').value;
+    const playlistDescription = document.getElementById('playlist-description').value;
+    const playlistPrivacy = document.getElementById('playlist-privacy').value;
+    const createStatus = document.getElementById('playlist-create-status');
 
-// --- Navigation and Screen Management ---
-function navigateTo(screenName) {
-    currentScreen = screenName;
-    renderScreen();
-    renderBottomNavBar(); // Ensure nav bar updates active state
-}
-
-function playSong(song) {
-    currentSong = song;
-    showChords = song.chords ? true : false; // Automatically show chords if available
-    showLyrics = song.lyrics ? true : false; // Automatically show lyrics if available
-    currentKey = 'C'; // Reset key when new song is played
-    showMoreOptions = false; // Close options when new song is played
-    navigateTo('player');
-}
-
-
-// --- Render Bottom Navigation Bar ---
-function renderBottomNavBar() {
-    const navItems = [
-        { id: 'home', icon: 'fas fa-home', text: 'Início' },
-        { id: 'search', icon: 'fas fa-search', text: 'Buscar' },
-        { id: 'library', icon: 'fas fa-book', text: 'Biblioteca' },
-        { id: 'community', icon: 'fas fa-users', text: 'Comunidade' },
-        { id: 'profile', icon: 'fas fa-user-circle', text: 'Perfil' },
-    ];
-
-    bottomNavBar.innerHTML = navItems.map(item => `
-        <button id="nav-${item.id}" class="flex flex-col items-center p-2 rounded-lg ${currentScreen === item.id || (currentScreen === 'player' && item.id === 'home') ? 'text-red-500' : 'text-gray-400 hover:text-red-400'} transition-colors duration-200">
-            <i class="${item.icon} text-xl mb-1"></i>
-            <span class="text-xs font-medium">${item.text}</span>
-        </button>
-    `).join('');
-
-    // Add event listeners for navigation buttons
-    navItems.forEach(item => {
-        document.getElementById(`nav-${item.id}`).addEventListener('click', () => navigateTo(item.id));
-    });
-}
-
-// --- Main Render Function ---
-function renderScreen() {
-    screenContent.scrollTop = 0; // Scroll to top when changing screens
-    switch (currentScreen) {
-        case 'onboarding':
-            renderOnboardingScreen();
-            break;
-        case 'home':
-            renderHomeScreen();
-            break;
-        case 'search':
-            renderSearchScreen();
-            break;
-        case 'library':
-            renderLibraryScreen();
-            break;
-        case 'community':
-            renderCommunityScreen();
-            break;
-        case 'player':
-            renderPlayerScreen();
-            break;
-        case 'profile':
-            // Placeholder for profile screen
-            screenContent.innerHTML = `
-                <div class="p-6 sm:p-8 md:p-10 text-center text-gray-400 h-full flex flex-col justify-center items-center">
-                    <i class="fas fa-user-circle text-5xl mb-4 text-red-400"></i>
-                    <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-50">Seu Perfil</h1>
-                    <p class="text-lg">Informações do usuário e configurações estarão aqui.</p>
-                </div>
-            `;
-            break;
-        default:
-            renderHomeScreen();
+    if (!playlistName.trim()) {
+        createStatus.textContent = 'O nome da playlist é obrigatório!';
+        createStatus.classList.add('text-red-500');
+        return;
     }
-}
 
-// Initial render calls
-renderScreen();
-renderBottomNavBar();
+    createStatus.textContent = `Criando playlist "${playlistName}"...`;
+    createStatus.classList.remove('text-red-500');
+    createStatus.classList.add('text-green-500');
+
+    setTimeout(() => {
+        // Simula a criação da playlist
+        console.log('Playlist criada:', { name: playlistName, description: playlistDescription, privacy: playlistPrivacy });
+        createStatus.textContent = `Playlist "${playlistName}" criada com sucesso!`;
+        // Você poderia adicionar a playlist à interface aqui dinamicamente
+        setTimeout(() => {
+            hideModal('create-playlist-modal');
+        }, 1000);
+    }, 2000);
+}

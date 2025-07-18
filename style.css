@@ -1,25 +1,103 @@
-/* Custom scrollbar for lyrics display */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: #374151; /* gray-700 */
-    border-radius: 10px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #ef4444; /* red-500 */
-    border-radius: 10px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #dc2626; /* red-600 */
-}
+/* Define a fonte Inter */
 body {
     font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita rolagem horizontal */
 }
-/* Style for selected onboarding buttons */
-.onboarding-option.selected {
-    border-color: #ef4444; /* red-500 */
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
-    background-color: #dc2626; /* Slightly darker red */
-    color: white;
+
+/* Cores padrão do tema */
+:root {
+    --primary-color: #EF4444; /* Vermelho padrão */
+    --background-color: #1A202C; /* Dark Gray */
+    --text-color: #E2E8F0; /* Light Gray */
+    --card-background: #2D3748; /* Medium Gray */
+    --border-color: #4A5568; /* Slightly lighter gray for borders */
+}
+
+/* Tema Claro */
+body.light-theme {
+    --background-color: #F7FAFC; /* White */
+    --text-color: #2D3748; /* Dark Gray */
+    --card-background: #FFFFFF; /* White */
+    --border-color: #E2E8F0; /* Lighter gray for borders */
+}
+
+/* Aplica as variáveis CSS */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bg-card {
+    background-color: var(--card-background);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.border-primary {
+    border-color: var(--primary-color);
+}
+
+.hover-primary:hover {
+    background-color: var(--primary-color);
+}
+
+/* Estilo para acordes */
+.chord {
+    color: var(--primary-color); /* Cor dos acordes */
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+/* Estilo para o player de música fixo */
+.music-player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-background);
+    border-top: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+/* Estilo para modais */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: var(--background-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
 }
